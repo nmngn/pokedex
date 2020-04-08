@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../../../../../SwiftCSV-master/SwiftCSV/CSV.swift">
+      location = "group:Pokedex.xcodeproj">
    </FileRef>
    <FileRef
-      location = "self:Pokedex.xcodeproj">
+      location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

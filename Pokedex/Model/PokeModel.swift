@@ -8,9 +8,9 @@
 
 import Foundation
 
-class pokeModel {
-    var _name : String
-    var _pokeId : Int
+struct PokeModel {
+    private var _name : String
+    private var _pokeId : Int
     
     var name : String {
         return _name
@@ -24,4 +24,5 @@ class pokeModel {
         self._name = name
         self._pokeId = pokeId
     }
+    
 }
