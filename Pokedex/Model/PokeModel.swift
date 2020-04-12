@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct PokeModel {
+class PokeModel {
     private var _name : String
     private var _pokeId : Int
     

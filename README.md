@@ -1,4 +1,2 @@
 # pokedex
-# pokedex
-# pokedex
-# pokedex
+# Awesome App For Pokemon User 
