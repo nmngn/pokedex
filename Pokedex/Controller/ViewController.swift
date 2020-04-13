@@ -151,14 +151,14 @@ extension ViewController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
     
-//        var pokeMon : PokeModel!
-//        if isFilteringMode {
-//            pokeMon = filteredPokemon[indexPath.item]
-//        } else {
-//            pokeMon = pokemon[indexPath.item]
-//        }
-//        performSegue(withIdentifier: "DetailPokemonVC", sender: pokeMon)
-//        
+        var pokeMon : PokeModel!
+        if isFilteringMode {
+            pokeMon = filteredPokemon[indexPath.item]
+        } else {
+            pokeMon = pokemon[indexPath.item]
+        }
+        performSegue(withIdentifier: "DetailPokemonVC", sender: pokeMon)
+        
     }
     
     
