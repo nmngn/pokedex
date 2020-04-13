@@ -84,14 +84,13 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailPokemonVC" {
-            if segue.destination.isKind(of: DetailViewController.self){
-                if let detailVC = segue.destination as? DetailViewController {
-                    if let indexPath = sender as? IndexPath {
-                        detailVC.pokeDetail = pokemon[indexPath.item]
-                        print(detailVC.pokeDetail.name)
-                    }
+            if let detailVC = segue.destination as? DetailViewController {
+                if let poke = sender as? PokeModel {
+                    detailVC.pokeDetail = poke
+                    print(detailVC.pokeDetail.name)
                 }
             }
+            
         }
     }
     
