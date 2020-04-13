@@ -13,12 +13,11 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var imageView : UIImageView!
     @IBOutlet weak var nameLbl : UILabel!
     
-    var pokeDetail : PokeModel?
+    var pokeDetail : PokeModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
-    
+ 
 
 }

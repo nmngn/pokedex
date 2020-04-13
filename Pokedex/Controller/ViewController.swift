@@ -84,12 +84,14 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailPokemonVC" {
-            if let detailVC = segue.destination as? DetailViewController {
-                if let poke = sender as? PokeModel{
-                    detailVC.pokeDetail = poke
+            if segue.destination.isKind(of: DetailViewController.self){
+                if let detailVC = segue.destination as? DetailViewController {
+                    if let indexPath = sender as? IndexPath {
+                        detailVC.pokeDetail = pokemon[indexPath.item]
+                        print(detailVC.pokeDetail.name)
+                    }
                 }
             }
-            
         }
     }
     
@@ -150,14 +152,14 @@ extension ViewController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
     
-        var pokeMon : PokeModel!
-        if isFilteringMode {
-            pokeMon = filteredPokemon[indexPath.item]
-        } else {
-            pokeMon = pokemon[indexPath.item]
-        }
-        performSegue(withIdentifier: "DetailPokemonVC", sender: pokeMon)
-        
+//        var pokeMon : PokeModel!
+//        if isFilteringMode {
+//            pokeMon = filteredPokemon[indexPath.item]
+//        } else {
+//            pokeMon = pokemon[indexPath.item]
+//        }
+//        performSegue(withIdentifier: "DetailPokemonVC", sender: pokeMon)
+//        
     }
     
     
