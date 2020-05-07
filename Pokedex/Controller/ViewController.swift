@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+ 
         pokeCl.delegate = self
         pokeCl.dataSource = self
         searchBar.delegate = self
@@ -34,7 +34,17 @@ class ViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
     
     func parseCSV() {
         let path = Bundle.main.path(forResource: "pokemon", ofType: "csv")
@@ -56,7 +66,6 @@ class ViewController: UIViewController {
     }
     
     func playMusic() {
-        
         let music = Bundle.main.url(forResource: "pokemon", withExtension: "mp3")
         
         do {
@@ -81,23 +90,7 @@ class ViewController: UIViewController {
             sender.alpha = 1.0
         }
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "DetailPokemonVC" {
-            if let detailVC = segue.destination as? DetailViewController {
-                if let poke = sender as? PokeModel {
-                    detailVC.pokeDetail = poke
-                    print(detailVC.pokeDetail.name)
-                }
-            }
-            
-        }
-    }
-    
-    
-    
-    
-    
+
 }
 
 
@@ -157,16 +150,16 @@ extension ViewController : UICollectionViewDelegate {
         } else {
             pokeMon = pokemon[indexPath.item]
         }
-        performSegue(withIdentifier: "DetailPokemonVC", sender: pokeMon)
-        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewController(identifier: "DetailPokemonVC") as! DetailViewController
+        viewController.pokeDetail = pokeMon
+        present(viewController, animated: true, completion: nil)
     }
-    
     
 }
 
 //MARK: SearchBar Delegate
 extension ViewController : UISearchBarDelegate {
-    
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text == "" {
@@ -182,3 +175,4 @@ extension ViewController : UISearchBarDelegate {
     }
     
 }
+

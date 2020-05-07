@@ -17,8 +17,9 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print(pokeDetail.name)
+        nameLbl.text = pokeDetail.name
+        print(pokeDetail.pokeId)
+        imageView.image = UIImage(named: "\(pokeDetail.pokeId)")
     }
  
 
