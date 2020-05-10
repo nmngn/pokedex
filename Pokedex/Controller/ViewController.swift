@@ -19,7 +19,8 @@ class ViewController: UIViewController {
     var filteredPokemon = [PokeModel]()
     var isFilteringMode = false
     
-    
+    var detailVC : DetailViewController!
+    var details : [Any]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,13 +49,19 @@ class ViewController: UIViewController {
     
     func parseCSV() {
         let path = Bundle.main.path(forResource: "pokemon", ofType: "csv")
+        
         do {
             let csv : CSV = try CSV(url: URL(fileURLWithPath: path!))
             let rows = csv.namedRows
             
             for row in rows {
-                if let PkId = Int(row["id"]!), let PkName = row["identifier"] {
-                    let poke = PokeModel(name: PkName, pokeId: PkId)
+                if let pkId = Int(row["id"]!),
+                    let pkName = row["identifier"],
+                    let pkHeight = row["height"],
+                    let pkWeight = row["weight"],
+                    let pkBaseEx = row["base_experience"] {
+                    let poke = PokeModel(name: pkName, pokeId: pkId)
+                    details = [ pkHeight, pkWeight, pkBaseEx]
                     pokemon.append(poke)
                 }
             }
@@ -75,9 +82,6 @@ class ViewController: UIViewController {
             print("Music fail \(error)")
         }
     }
-    
-    
-    
     @IBAction func musicBtn(_ sender: UIButton) {
         
         player.prepareToPlay()
@@ -92,9 +96,6 @@ class ViewController: UIViewController {
     }
 
 }
-
-
-
 
 //MARK: CollectionView Data Source
 extension ViewController : UICollectionViewDataSource {
@@ -150,10 +151,11 @@ extension ViewController : UICollectionViewDelegate {
         } else {
             pokeMon = pokemon[indexPath.item]
         }
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let viewController = storyboard.instantiateViewController(identifier: "DetailPokemonVC") as! DetailViewController
         viewController.pokeDetail = pokeMon
-        present(viewController, animated: true, completion: nil)
+        viewController.detail = details
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
 }
