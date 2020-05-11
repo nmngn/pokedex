@@ -20,7 +20,6 @@ class ViewController: UIViewController {
     var isFilteringMode = false
     
     var detailVC : DetailViewController!
-    var details : [Any]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,11 +56,10 @@ class ViewController: UIViewController {
             for row in rows {
                 if let pkId = Int(row["id"]!),
                     let pkName = row["identifier"],
-                    let pkHeight = row["height"],
-                    let pkWeight = row["weight"],
-                    let pkBaseEx = row["base_experience"] {
-                    let poke = PokeModel(name: pkName, pokeId: pkId)
-                    details = [ pkHeight, pkWeight, pkBaseEx]
+                    let pkHeight = Int(row["height"]!),
+                    let pkWeight = Int(row["weight"]!),
+                    let pkBaseEx = Int(row["base_experience"]!) {
+                    let poke = PokeModel(name: pkName, pokeId: pkId, pkHeight: pkHeight, pkWeight: pkWeight, pkBaseEx: pkBaseEx)
                     pokemon.append(poke)
                 }
             }
@@ -148,13 +146,14 @@ extension ViewController : UICollectionViewDelegate {
         var pokeMon : PokeModel!
         if isFilteringMode {
             pokeMon = filteredPokemon[indexPath.item]
+        
         } else {
             pokeMon = pokemon[indexPath.item]
+            
         }
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let viewController = storyboard.instantiateViewController(identifier: "DetailPokemonVC") as! DetailViewController
         viewController.pokeDetail = pokeMon
-        viewController.detail = details
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     

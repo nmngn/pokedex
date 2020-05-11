@@ -16,7 +16,7 @@ class StoryViewController: UIViewController {
         super.viewDidLoad()
 
         storyLbl.backgroundColor = UIColor.white.withAlphaComponent(0.6)
-       
+
     }
     
 

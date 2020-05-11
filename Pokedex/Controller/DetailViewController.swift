@@ -16,16 +16,15 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var weightLbl : UILabel!
     @IBOutlet weak var baseExlbl : UILabel!
 
-    var detail : [Any]!
-    var pokeDetail : PokeModel!
+        var pokeDetail : PokeModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         nameLbl.text = pokeDetail.name
         imageView.image = UIImage(named: "\(pokeDetail.pokeId)")
-        heightLbl.text = "Height : \(detail[0] as! String)"
-        weightLbl.text = "Weight : \(detail[1] as! String)"
-        baseExlbl.text = "Base Ex : \(detail[2] as! String)"
+        heightLbl.text = "Height : \(pokeDetail.height)"
+        weightLbl.text = "Weight : \(pokeDetail.weight)"
+        baseExlbl.text = "Base Ex : \(pokeDetail.baseEx)"
     }
      
     
